@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { MyTeamsPage } from '../pages';
+import { StandingsPage, TeamDetailPage, MyTeamsPage } from '../pages.ts';
 @Component({
-  selector: 'team-detail',
-  templateUrl: 'team-detail.page.html'
+  selector: 'team-home',
+  templateUrl: 'team-home.page.html'
 })
-export class TeamDetailPage {
+export class TeamHomePage {
   
   team: any;
+  teamDetailTab = TeamDetailPage;
+  standingsTab = StandingsPage;
 
   constructor(public nav: NavController, private navParams: NavParams) {
     this.team = this.navParams.data;
-    console.log(navParams);
   }
 
-  /*goHome(){
+  goHome(){
     //this.nav.push(MyTeamsPage);
-    //this.nav.popToRoot();
-    this.nav.parent.parent.popToRoot();
-  }*/
+    this.nav.popToRoot();
+  }
 }

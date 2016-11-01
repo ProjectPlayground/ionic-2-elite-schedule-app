@@ -3,7 +3,7 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 
-import { MyTeamsPage, TeamDetailPage, TeamsPage, TournamentsPage, GamePage } from '../pages/pages';
+import { MyTeamsPage, TeamDetailPage, TeamsPage, TournamentsPage, GamePage, TeamHomePage, StandingsPage } from '../pages/pages';
 @NgModule({
   declarations: [
     MyApp,
@@ -11,7 +11,9 @@ import { MyTeamsPage, TeamDetailPage, TeamsPage, TournamentsPage, GamePage } fro
     TeamDetailPage,
     TeamsPage,
     TournamentsPage,
-    GamePage
+    GamePage,
+    TeamHomePage,
+    StandingsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -23,7 +25,9 @@ import { MyTeamsPage, TeamDetailPage, TeamsPage, TournamentsPage, GamePage } fro
     TeamDetailPage,
     TeamsPage,
     TournamentsPage,
-    GamePage
+    GamePage,
+    TeamHomePage,
+    StandingsPage
   ],
   providers: []
 })
