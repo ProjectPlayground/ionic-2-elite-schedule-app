@@ -1,1 +1,1 @@
-export * from './elite-api.service.ts';
+export * from './elite-api.service';

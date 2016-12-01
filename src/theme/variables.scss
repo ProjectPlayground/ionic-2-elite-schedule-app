@@ -31,7 +31,6 @@ $colors: (
   favorite:   #69BB7B
 );
 
-
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
@@ -51,7 +50,7 @@ $colors: (
 // Windows only Sass variables can go here
 
 
-
+@import "ionic.theme.default";
 
 // App Theme
 // --------------------------------------------------
