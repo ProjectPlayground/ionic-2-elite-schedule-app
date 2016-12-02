@@ -4,8 +4,13 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
-    "build": "ionic-app-scripts build --dev",
-    "watch": "ionic-app-scripts watch",
+    "build:pug": "gulp",
+    "watch:pug": "gulp watch",
+    "clean": "gulp clean",
+    "build:ionic": "node ./build/build.js build",
+    "watch:ionic": "ionic-app-scripts watch",
+    "build": "npm run build-pug && npm run build-ionic --dev",
+    "watch": "npm-run-all --parallel watch:*",
     "serve:before": "watch",
     "emulate:before": "build",
     "deploy:before": "build",
@@ -34,6 +39,12 @@
   "devDependencies": {
     "@ionic/app-scripts": "0.0.45",
     "@types/lodash": "^4.14.40",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-pug": "^3.1.0",
+    "gulp-watch": "^4.3.11",
+    "npm-run-all": "^3.1.2",
+    "pug-plugin-ng": "0.0.2",
     "typescript": "^2.0.10"
   },
   "description": "elite-schedule-app: An Ionic project",

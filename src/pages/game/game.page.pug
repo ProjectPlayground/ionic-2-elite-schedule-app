@@ -1,0 +1,8 @@
+ion-header
+  ion-navbar
+    ion-title Game
+ion-content(padding)
+  h3 Home Team
+  button(ion-button, (click)='teamTapped(game.team1Id)') {{game?.team1}}
+  h3 Away Team
+  button(ion-button, (click)='teamTapped(game.team2Id)') {{game?.team2}}

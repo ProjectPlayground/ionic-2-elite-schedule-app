@@ -1,0 +1,38 @@
+ion-header
+  ion-navbar
+ion-content(padding)
+  h2 Standings
+  ion-list
+    ion-item-group(*ngFor='let division of allStandings')
+      ion-item-divider(color='secondary')
+        | {{division.divisionName}}
+      ion-item(*ngFor='let team of division.divisionStandings')
+        ion-row
+          ion-col
+            h2(color='primary') {{team.teamName}}
+        ion-row
+          ion-col
+            h2 Wins
+          ion-col
+            h2 Losses
+          ion-col
+            h2 Pct
+          ion-col
+            h2 PF
+          ion-col
+            h2 PA
+          ion-col
+            h2 Diff
+        ion-row
+          ion-col
+            h5 {{team.wins}}
+          ion-col
+            h5 {{team.losses}}
+          ion-col
+            h5 {{team.winningPct}}
+          ion-col
+            h5 {{team.pointsFor}}
+          ion-col
+            h5 {{team.pointsAgainst}}
+          ion-col
+            h5 {{team.pointsDiff}}

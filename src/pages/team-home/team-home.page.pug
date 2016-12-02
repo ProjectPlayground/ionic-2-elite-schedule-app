@@ -1,0 +1,10 @@
+ion-header
+  ion-navbar(color='primary')
+    ion-title
+      | {{team.name}}
+    ion-buttons(end)
+      button((click)='goHome()', ion-button)
+        ion-icon(name='home')
+ion-tabs
+  ion-tab(tabtitle='Team', [root]='teamDetailTab', [rootParams]='team', tabicon='basketball')
+  ion-tab(tabtitle='Standings', [root]='standingsTab', [rootParams]='team', tabicon='podium')

@@ -3,7 +3,8 @@
     "no-duplicate-variable": true,
     "no-unused-variable": [
       true
-    ]
+    ],
+    "adjacent-overload-signatures": true
   },
   "rulesDirectory": [
     "node_modules/tslint-eslint-rules/dist/rules"

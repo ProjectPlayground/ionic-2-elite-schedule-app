@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { EliteApi } from './../../app/shared/elite-api.service';
 import { TeamHomePage } from '../pages';
+
 @Component({
   selector: 'game',
   templateUrl: 'game.page.html'

@@ -1,0 +1,10 @@
+ion-header
+  ion-navbar(color='primary')
+    ion-title Teams
+ion-content(padding)
+  ion-list
+    ion-item-group(*ngFor='let division of teams')
+      ion-item-divider(color='secondary')
+        | {{division.divisionName}}
+      button(ion-item, *ngFor='let team of division.divisionTeams', (click)='itemTapped($event, team)')
+        | {{team.name}}

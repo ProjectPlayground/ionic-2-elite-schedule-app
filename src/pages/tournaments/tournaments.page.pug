@@ -1,0 +1,6 @@
+ion-header
+  ion-navbar(color='primary')
+    ion-title Select a Tournament
+ion-content
+  ion-list
+    button(ion-item, *ngFor='let item of tournaments', (click)='itemTapped($event, item)') {{item.name}}

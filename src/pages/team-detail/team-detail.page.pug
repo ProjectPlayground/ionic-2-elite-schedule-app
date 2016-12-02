@@ -1,0 +1,32 @@
+ion-header
+  ion-navbar(color='primary')
+    ion-title
+ion-content(padding)
+  ion-card
+    ion-card-content
+      ion-row
+        ion-col(width-50)
+          h2 Record: {{teamStanding?.wins}}-{{teamStanding?.losses}}
+          p Coach: {{team.coach}}
+        ion-col(width-50, text-right)
+          button(ion-button, outline, (click)='toggleFollow()', *ngIf='!isFollowing')
+            ion-icon(name='star')
+            |             Add Favorite
+          button(ion-button, (click)='toggleFollow()', *ngIf='isFollowing')
+            ion-icon(name='star')
+      ion-item
+        ion-label  Date Filter:
+        ion-toggle([(ngModel)]='useDateFilter', (ionchange)='dateChanged()')
+        ion-datetime(displayformat='M/D/YYYY', pickerformat='M/D/YYYY', [(ngModel)]='dateFilter', (ionchange)='dateChanged()', [(disabled)]='!useDateFilter')
+  ion-list
+    button(ion-item, *ngFor='let game of games', (click)='gameClicked($event, game)')
+      ion-row
+        ion-col(width-20)
+          p {{game.time | date: 'M/d/yy'}}
+          p {{game.time | date: 'shortTime'}}
+        ion-col(width-60)
+          p {{game.homeAway}} {{game.opponent}}
+          p {{game.location}}
+        ion-col(width-20)
+          h4 {{game.scoreDisplay}}
+          ion-badge([color]='getScoreDisplayBadgeClass(game)') {{getScoreWorL(game)}}
