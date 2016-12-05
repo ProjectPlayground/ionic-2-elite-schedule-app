@@ -20,6 +20,6 @@ export class GamePage {
   teamTapped(teamId){
     const tourneyData = this.eliteApi.getCurrentTourney();
     const team = tourneyData.teams.find(t => t.id === teamId);
-    this.nav.push(TeamHomePage, team)
+    this.nav.push(TeamHomePage, team);
   }
 }

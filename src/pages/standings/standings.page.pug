@@ -1,39 +1,43 @@
 ion-header
   ion-navbar
+  ion-toolbar
+    ion-segment(color="secondary" [(ngModel)]="divisionFilter" (ionChange)="filterDivision")
+      ion-segment-button(value="division") Division
+      ion-segment-button(value="all") All
 ion-content(padding)
   ion-list([virtualScroll]="standings" [approxItemHeight]="'132px'" [headerFn]="getHeader")
     ion-item-divider(color='secondary' *virtualHeader="let header")
         | {{header}}
     ion-item(*virtualItem="let team")
-    ion-row
+      ion-row
+          ion-col
+            h2(color='primary') {{team?.teamName}}
+      ion-row
         ion-col
-          h2(color='primary') {{team.teamName}}
-    ion-row
-      ion-col
-        h2 Wins
-      ion-col
-        h2 Losses
-      ion-col
-        h2 Pct
-      ion-col
-        h2 PF
-      ion-col
-        h2 PA
-      ion-col
-        h2 Diff
-    ion-row
-      ion-col
-        h5 {{team.wins}}
-      ion-col
-        h5 {{team.losses}}
-      ion-col
-        h5 {{team.winningPct}}
-      ion-col
-        h5 {{team.pointsFor}}
-      ion-col
-        h5 {{team.pointsAgainst}}
-      ion-col
-        h5 {{team.pointsDiff}}
+          h2 Wins
+        ion-col
+          h2 Losses
+        ion-col
+          h2 Pct
+        ion-col
+          h2 PF
+        ion-col
+          h2 PA
+        ion-col
+          h2 Diff
+      ion-row
+        ion-col
+          h5 {{team?.wins}}
+        ion-col
+          h5 {{team?.losses}}
+        ion-col
+          h5 {{team?.winningPct}}
+        ion-col
+          h5 {{team?.pointsFor}}
+        ion-col
+          h5 {{team?.pointsAgainst}}
+        ion-col
+          h5 {{team?.pointsDiff}}
 //  ion-list
 //    ion-item-group(*ngFor='let division of allStandings')
 //      ion-item(*ngFor='let team of division.divisionStandings')

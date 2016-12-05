@@ -45,7 +45,7 @@ export class TeamsPage {
   }
 
   itemTapped($event, team){
-    this.nav.push(TeamHomePage, team)
+    this.nav.push(TeamHomePage, team);
   }
 
   updateTeams(){
