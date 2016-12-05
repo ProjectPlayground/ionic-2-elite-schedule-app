@@ -5,7 +5,7 @@ import _ from 'lodash';
 import * as moment from 'moment';
 
 import { GamePage } from '../pages';
-import { EliteApi } from './../../app/shared/elite-api.service';
+import { EliteApi, UserSettings } from './../../app/shared/shared';
 
 @Component({
   selector: 'team-detail',
@@ -15,7 +15,7 @@ export class TeamDetailPage {
   allGames: any[];
   dateFilter: string;
   games: any[];
-  isFollowing: boolean = false;
+  isFollowing: boolean | {} = false;
   team: any = {};
   teamStanding: any = {};
   private tourneyData: any;
@@ -26,7 +26,8 @@ export class TeamDetailPage {
     private nav: NavController,
     private navParams: NavParams,
     private toastController: ToastController,
-    private eliteApi: EliteApi) {}
+    private eliteApi: EliteApi,
+    private userSettings: UserSettings) {}
 
   ionViewDidLoad(){
     this.team = this.navParams.data;
@@ -52,6 +53,7 @@ export class TeamDetailPage {
     
     this.allGames = this.games;
     this.teamStanding = _.find(this.tourneyData.standings, { 'teamId': this.team.id });
+    this.userSettings.isFavoriteTeam(this.team.id).then(value => this.isFollowing = value);
   }
 
   getScoreDisplay(isTeam1, team1Score, team2Score){
@@ -95,7 +97,7 @@ export class TeamDetailPage {
               text: 'Yes',
               handler: () => {
                this.isFollowing = false;
-               //TODO: persist data
+               this.userSettings.unfavoriteTeam(this.team);
 
                 const toast = this.toastController.create({
                   message: 'You have unfollowed this team',
@@ -114,9 +116,19 @@ export class TeamDetailPage {
 
       confirm.present();
     } else {
-      this.isFollowing = true;
-      // TODO: persist data
+      this.isFollowing = true;;
+      this.userSettings.favoriteTeam(
+        this.team,
+        this.tourneyData.tournament.id,
+        this.tourneyData.tournamentName);
     }
+  }
+
+  refreshAll(refresher){
+    this.eliteApi.refreshCurrentTourney().subscribe(() => {
+      refresher.complete();
+      this.ionViewDidLoad();
+    });
   }
 
   /*goHome(){

@@ -2,6 +2,9 @@ ion-header
   ion-navbar(color='primary')
     ion-title
 ion-content(padding)
+  ion-refresher((ionRefresh)="refreshAll($event)")
+    ion-refresher-content
+
   ion-card
     ion-card-content
       ion-row
