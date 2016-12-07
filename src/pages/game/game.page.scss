@@ -1,0 +1,17 @@
+game {
+    $border-style: thin solid blue;
+
+
+    .top-bottom-border {
+        border-top: $border-style;
+        border-bottom: $border-style;
+    }
+
+    .divider-col {
+        border-right: $border-style;
+    }
+
+    ion-icon:before{
+        margin-right: 10px;
+    }
+}

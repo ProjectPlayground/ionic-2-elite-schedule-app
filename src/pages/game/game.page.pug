@@ -1,8 +1,36 @@
 ion-header
-  ion-navbar
+  ion-navbar(color="primary")
     ion-title Game
-ion-content(padding)
-  h3 Home Team
-  button(ion-button, (click)='teamTapped(game.team1Id)') {{game?.team1}}
-  h3 Away Team
-  button(ion-button, (click)='teamTapped(game.team2Id)') {{game?.team2}}
+
+ion-content
+    ion-row
+        ion-col(width-50 text-center class="divider-col")
+            button(ion-button clear full (click)="teamTapped(game.team1Id)") Home
+        ion-col(width-50 text-center)
+            button(ion-button clear full (click)="teamTapped(game.team2Id)") Away
+    ion-row(center)
+        ion-col(width-50 text-center class="divider-col" (click)="teamTapped(game.team1Id)")
+          h4 {{game.team1}}
+        ion-col(width-50 text-center (click)="teamTapped(game.team2Id)")
+          h4 {{game.team2}}
+    ion-row(baseline class="top-bottom-border")
+        ion-col(text-center (click)="teamTapped(game.team1Id)")
+            //<h1 [class.primary-color]="isWinner(game.team1Score, game.team2Score)">{{game.team1Score}}</h1>
+            h1([color]="isWinner(game.team1Score, game.team2Score)") {{game.team1Score}}
+        ion-col(text-center)
+            ion-label Score
+        ion-col(text-center (click)="teamTapped(game.team2Id)")
+            //<h1 [class.primary-color]="isWinner(game.team2Score, game.team1Score)">{{game.team2Score}}</h1>
+            h1([color]="isWinner(game.team2Score, game.team1Score)") {{game.team2Score}}            
+
+    ion-card
+        ion-item
+            ion-icon(name="calendar" item-left) {{game.gameTime | date:'M/d/yy'}} {{game.gameTime | date:'shortTime'}}
+        ion-row
+            ion-col(width-60)
+                ion-label {{game.location}}
+            ion-col(width-40 text-right)
+                button(ion-button icon-only outline (click)="goToMap()")
+                    ion-icon(name="map")
+                button(ion-button icon-only outline (click)="goToDirections()")
+                    ion-icon(name="navigate")
