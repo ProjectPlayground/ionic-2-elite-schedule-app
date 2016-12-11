@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
 import { Storage } from '@ionic/storage';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 import { MyApp } from './app.component';
 
-import { MyTeamsPage, TeamDetailPage, TeamsPage, TournamentsPage, GamePage, TeamHomePage, StandingsPage } from '../pages/pages';
+import { MyTeamsPage, TeamDetailPage, TeamsPage, TournamentsPage, GamePage, TeamHomePage, StandingsPage, MapPage } from '../pages/pages';
+import { EliteApi, UserSettings } from './shared/shared';
 @NgModule({
   declarations: [
     MyApp,
@@ -15,11 +17,15 @@ import { MyTeamsPage, TeamDetailPage, TeamsPage, TournamentsPage, GamePage, Team
     TournamentsPage,
     GamePage,
     TeamHomePage,
-    StandingsPage
+    StandingsPage,
+    MapPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCEa8esjMkV6Nb3HOsFytOOxy9aza4B64s'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -30,8 +36,12 @@ import { MyTeamsPage, TeamDetailPage, TeamsPage, TournamentsPage, GamePage, Team
     TournamentsPage,
     GamePage,
     TeamHomePage,
-    StandingsPage
+    StandingsPage,
+    MapPage
   ],
-  providers: [Storage]
+  providers: [
+    EliteApi,
+    Storage,
+    UserSettings]
 })
-export class AppModule {}
+export class AppModule { }

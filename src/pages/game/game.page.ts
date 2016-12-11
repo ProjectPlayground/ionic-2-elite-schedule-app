@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { EliteApi } from './../../app/shared/elite-api.service';
-import { TeamHomePage } from '../pages';
+import { MapPage, TeamHomePage } from '../pages';
 
 @Component({
   selector: 'game',
@@ -32,7 +32,7 @@ export class GamePage {
   }
 
   goToMap() {
-    //Placeholder
+    this.nav.push(MapPage, this.game);
   }
 
   isWinner(score1, score2) {

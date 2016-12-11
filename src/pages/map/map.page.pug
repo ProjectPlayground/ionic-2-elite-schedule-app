@@ -1,0 +1,9 @@
+ion-header
+    ion-navbar
+        ion-title Map
+
+ion-content
+    sebm-google-map(id="map" [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom")
+        sebm-google-map-marker([latitude]="map.lat" [longitude]="map.lng"  [iconUrl]="map.marker")
+            sebm-google-map-info-window
+                strong {{map.markerLabel}}

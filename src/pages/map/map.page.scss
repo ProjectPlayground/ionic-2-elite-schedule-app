@@ -1,0 +1,8 @@
+map {
+    .sebm-google-map-container#map{
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 150ms ease-in;
+    }
+}
