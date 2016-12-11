@@ -2,6 +2,10 @@ ion-header
     ion-navbar
         ion-title Map
 
+ion-fab(left bottom)
+    button(ion-fab class="fab-map" (click)="getDirections()")
+        ion-icon(name="navigate")
+
 ion-content
     sebm-google-map(id="map" [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom")
         sebm-google-map-marker([latitude]="map.lat" [longitude]="map.lng"  [iconUrl]="map.marker")
