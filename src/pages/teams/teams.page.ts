@@ -3,7 +3,7 @@ import { LoadingController, NavController, NavParams } from 'ionic-angular';
 import _ from 'lodash';
 
 import { TeamHomePage } from '../pages';
-import { EliteApi } from '../../app/shared/elite-api.service';
+import { EliteApi } from '../../app/shared/shared';
 
 @Component({
   selector: 'page-teams',

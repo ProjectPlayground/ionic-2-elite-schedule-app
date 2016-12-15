@@ -23,14 +23,10 @@ export class MyApp {
   constructor(
     private events: Events,
     private loadingController: LoadingController,
-    private eliteApi : EliteApi,
+    private eliteApi: EliteApi,
     public platform: Platform,
-    private UserSettings: UserSettings) {
+    private userSettings: UserSettings) {
     this.initializeApp();
-  }
-
-  refreshFavorites(){
-    this.UserSettings.getAllFavorites().then(favs => this.favoriteTeams = favs);
   }
 
   initializeApp() {
@@ -40,26 +36,33 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
 
-      this.refreshFavorites();
-      this.events.subscribe('favorites:changed', () => this.refreshFavorites());
+      this.userSettings.initStorage().then(() => {
+        this.rootPage = MyTeamsPage;
+        this.refreshFavorites();
+        this.events.subscribe('favorites:changed', () => this.refreshFavorites());
+      });
     });
   }
 
-  goHome()
-  {
+  refreshFavorites() {
+    this.userSettings.getAllFavorites().then(favs => this.favoriteTeams = favs);
+  }
+
+
+  goHome() {
     this.nav.push(MyTeamsPage)
   }
 
-  goToTeam(favorite){
+  goToTeam(favorite) {
     let loader = this.loadingController.create({
-        content: 'Getting data...',
-        dismissOnPageChange: true
+      content: 'Getting data...',
+      dismissOnPageChange: true
     });
     loader.present();
     this.eliteApi.getTournamentData(favorite.tournamentId).subscribe(l => this.nav.push(TeamHomePage, favorite.team));
   }
 
-  goToTournaments(){
+  goToTournaments() {
     this.nav.push(TournamentsPage)
   }
 }
