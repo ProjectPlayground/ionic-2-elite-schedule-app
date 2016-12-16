@@ -10,7 +10,7 @@ html(lang='en', dir='ltr')
     link(rel='manifest', href='manifest.json')
     meta(name='theme-color', content='#4e8ef7')
     // cordova.js required for cordova apps
-    script(src='cordova.js')
+    script(async src='cordova.js')
     //
       un-comment this code to enable service worker
       <script>
@@ -25,6 +25,6 @@ html(lang='en', dir='ltr')
     // Ionic's root component and where the app will load
     ion-app
     // The polyfills js is generated during the build process
-    script(src='build/polyfills.js')
+    script(async src='build/polyfills.js')
     // The bundle js is generated during the build process
-    script(src='build/main.js')
+    script(async src='build/main.js')

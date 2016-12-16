@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { SQLite } from 'ionic-native';
 import { SqlStorage } from './shared';
 
 const win: any = window;
