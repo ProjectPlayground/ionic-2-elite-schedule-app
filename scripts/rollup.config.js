@@ -3,6 +3,8 @@ var commonjs = require('rollup-plugin-commonjs');
 var globals = require('rollup-plugin-node-globals');
 var builtins = require('rollup-plugin-node-builtins');
 var json = require('rollup-plugin-json');
+var strip = require('rollup-plugin-strip');
+var progress = require('rollup-plugin-progress');
 
 // https://github.com/rollup/rollup/wiki/JavaScript-API
 
@@ -35,12 +37,20 @@ var rollupConfig = {
    * See https://github.com/rollup/rollup/wiki/Plugins for more info.
    */
   plugins: [
+    /*progress({
+      clearLine: true
+    }),*/
     builtins(),
     commonjs({
-        namedExports: {
-            'node_modules/angular2-google-maps/core/index.js': ['AgmCoreModule']
-        }
+      namedExports: {
+        'node_modules/angular2-google-maps/core/index.js': ['AgmCoreModule']
+      }
     }),
+    /*strip({
+      debugger: true,
+      functions: ['console.log', 'assert.*', 'debug', 'alert'],
+      sourceMap: true
+    }),*/
     nodeResolve({
       module: true,
       jsnext: true,
@@ -51,10 +61,9 @@ var rollupConfig = {
     globals(),
     json()
   ]
-
 };
 
-
+//process.env.BUILD
 if (process.env.IONIC_ENV == 'prod') {
   // production mode
   rollupConfig.entry = '{{TMP}}/app/main.prod.ts';

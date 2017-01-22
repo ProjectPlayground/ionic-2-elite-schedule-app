@@ -27,59 +27,59 @@ export class TeamDetailPage {
     private navParams: NavParams,
     private toastController: ToastController,
     private eliteApi: EliteApi,
-    private userSettings: UserSettings) {}
+    private userSettings: UserSettings) { }
 
-  ionViewDidLoad(){
+  ionViewDidLoad() {
     this.team = this.navParams.data;
     this.tourneyData = this.eliteApi.getCurrentTourney();
 
     this.games = _.chain(this.tourneyData.games)
-                  .filter(g => g.team1Id === this.team.id || g.team2Id === this.team.id)
-                  .map(g => {
-                      const isTeam1 = (g.team1Id === this.team.id);
-                      const opponentName = isTeam1 ? g.team2 : g.team1;
-                      const scoreDisplay = this.getScoreDisplay(isTeam1, g.team1Score, g.team2Score);
-                      return {
-                        gameId: g.id,
-                        opponent: opponentName,
-                        time: Date.parse(g.time),
-                        location: g.location,
-                        locationUrl: g.locationUrl,
-                        scoreDisplay: scoreDisplay,
-                        homeAway: (isTeam1 ? "vs." : "at")
-                      };
-                  })
-                  .value();
-    
+      .filter(g => g.team1Id === this.team.id || g.team2Id === this.team.id)
+      .map(g => {
+        const isTeam1 = (g.team1Id === this.team.id);
+        const opponentName = isTeam1 ? g.team2 : g.team1;
+        const scoreDisplay = this.getScoreDisplay(isTeam1, g.team1Score, g.team2Score);
+        return {
+          gameId: g.id,
+          opponent: opponentName,
+          time: Date.parse(g.time),
+          location: g.location,
+          locationUrl: g.locationUrl,
+          scoreDisplay: scoreDisplay,
+          homeAway: (isTeam1 ? "vs." : "at")
+        };
+      })
+      .value();
+
     this.allGames = this.games;
     this.teamStanding = _.find(this.tourneyData.standings, { 'teamId': this.team.id });
     this.userSettings.isFavoriteTeam(this.team.id).then(value => this.isFollowing = value);
   }
 
-  getScoreDisplay(isTeam1, team1Score, team2Score){
-    if(team1Score && team2Score){
+  getScoreDisplay(isTeam1, team1Score, team2Score) {
+    if (team1Score && team2Score) {
       let teamScore = (isTeam1 ? team1Score : team2Score);
       let opponentScore = (isTeam1 ? team2Score : team1Score);
       let winIndicator = teamScore > opponentScore ? "W: " : "L: ";
       return winIndicator + teamScore + "-" + opponentScore;
     }
-    return ""; 
+    return "";
   }
 
-  gameClicked($event, game){
+  gameClicked($event, game) {
     let sourceGame = this.tourneyData.games.find(g => g.id === game.gameId);
     this.nav.parent.parent.push(GamePage, sourceGame);
   }
 
-  getScoreWorL(game){
+  getScoreWorL(game) {
     return game.scoreDisplay ? game.scoreDisplay[0] : '';
   }
 
-  getScoreDisplayBadgeClass(game){
+  getScoreDisplayBadgeClass(game) {
     return game.scoreDisplay.indexOf('W:') === 0 ? 'primary' : 'danger';
   }
 
-  dateChanged(){
+  dateChanged() {
     if (this.useDateFilter) {
       this.games = _.filter(this.allGames, g => moment(g.time).isSame(this.dateFilter, 'day'));
     } else {
@@ -87,31 +87,31 @@ export class TeamDetailPage {
     }
   }
 
-  toggleFollow(){
-    if(this.isFollowing){
+  toggleFollow() {
+    if (this.isFollowing) {
       const confirm = this.alertController.create({
-          title: 'Unfollow?',
-          message: 'Are you sure you want to unfollow?',
-          buttons: [
-            {
-              text: 'Yes',
-              handler: () => {
-               this.isFollowing = false;
-               this.userSettings.unfavoriteTeam(this.team);
+        title: 'Unfollow?',
+        message: 'Are you sure you want to unfollow?',
+        buttons: [
+          {
+            text: 'Yes',
+            handler: () => {
+              this.isFollowing = false;
+              this.userSettings.unfavoriteTeam(this.team);
 
-                const toast = this.toastController.create({
-                  message: 'You have unfollowed this team',
-                  duration: 2000,
-                  position: 'bottom'
-                });
+              const toast = this.toastController.create({
+                message: 'You have unfollowed this team',
+                duration: 2000,
+                position: 'bottom'
+              });
 
-                toast.present();
-              }
-            },
-            {
-              text: 'No'
+              toast.present();
             }
-          ]
+          },
+          {
+            text: 'No'
+          }
+        ]
       });
 
       confirm.present();
@@ -124,7 +124,7 @@ export class TeamDetailPage {
     }
   }
 
-  refreshAll(refresher){
+  refreshAll(refresher) {
     this.eliteApi.refreshCurrentTourney().subscribe(() => {
       refresher.complete();
       this.ionViewDidLoad();

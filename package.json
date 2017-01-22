@@ -7,7 +7,7 @@
     "build:pug": "gulp",
     "watch:pug": "gulp watch",
     "clean": "gulp clean",
-    "build:ionic": "node ./build/build.js build",
+    "build:ionic": "ionic-app-scripts build --dev",
     "watch:ionic": "ionic-app-scripts watch",
     "build": "npm run build-pug && npm run build-ionic --dev",
     "watch": "npm-run-all --parallel watch:*",
@@ -46,6 +46,8 @@
     "gulp-watch": "^4.3.11",
     "npm-run-all": "^3.1.2",
     "pug-plugin-ng": "0.0.2",
+    "rollup-plugin-progress": "^0.1.0",
+    "rollup-plugin-strip": "^1.1.1",
     "typescript": "^2.0.10"
   },
   "description": "elite-schedule-app: An Ionic project",
